@@ -1,0 +1,236 @@
+package compiler.syntax;
+
+// Declaración de importaciones 
+//(No modificar las proporcionadas. Se pueden agregar mas)
+
+import java_cup.runtime.Symbol;
+import java.util.*;
+
+import es.uned.compiler.lexical.*;
+import es.uned.compiler.code.*;
+import es.uned.compiler.intermediate.*;
+import es.uned.compiler.semantic.*;
+import es.uned.compiler.semantic.symbol.*;
+import es.uned.compiler.semantic.type.*;
+import es.uned.compiler.syntax.*;
+
+import compiler.CompilerContext;
+import compiler.lexical.*;
+import compiler.syntax.nonTerminal.*;
+import compiler.semantic.*;
+import compiler.semantic.symbol.*;
+import compiler.semantic.type.TypeSimple.Tipo;
+import  compiler.syntax.nonTerminal.LlamadaFuncionOProcedimiento.TipoLlamada;
+import compiler.semantic.type.*;
+import compiler.intermediate.*;
+import compiler.code.*;
+
+// Declaración del código de usuario
+
+action code {:
+	
+	SyntaxErrorManager        syntaxErrorManager   = CompilerContext.getSyntaxErrorManager();
+	
+	// Las siguientes declaraciones pueden ser comentadas para la entrega de Febrero
+	SemanticErrorManager      semanticErrorManager = CompilerContext.getSemanticErrorManager ();
+	ScopeManagerIF            scopeManager         = CompilerContext.getScopeManager ();
+	FinalCodeFactoryIF        finalCodeFactory     = CompilerContext.getFinalCodeFactory ();
+
+:}	
+
+parser code {:
+	SyntaxErrorManager        syntaxErrorManager   = CompilerContext.getSyntaxErrorManager();
+	
+	public void syntax_error(Symbol symbol)
+	{ 
+	    Token token = (Token) symbol.value;
+	    syntaxErrorManager.syntaxError ("Error sintáctico", token);    
+	}
+		
+	public void unrecovered_syntax_error(java_cup.runtime.Symbol symbol)
+	{	
+		Token token = (Token) symbol.value;
+	    syntaxErrorManager.syntaxFatalError ("Error fatal", token);
+	}
+:}
+
+// Declaración de terminales (Ejemplo)
+
+terminal Token 		PROGRAM, CONST, TYPE, RECORD, VAR;
+terminal Token 		IDENTIFICADOR;
+terminal Token		TRUE, FALSE;
+terminal IntegerToken 	LITERALENTERO;
+terminal Token 		BEGIN, END;
+terminal Token 		INTEGER, BOOLEAN;
+terminal Token 		POINT, CARET, AT;
+terminal Token 		TWOPOINTS, SETOF;
+terminal Token 		OPENSQUAREBRACKET, CLOSESQUAREBRACKET; 
+terminal Token 		FUNCTION, PROCEDURE;
+terminal Token 		IF, THEN, ELSE;
+terminal Token 		FOR, TO, DO;
+terminal Token 		REPEAT, UNTIL;
+terminal Token 		WRITE, WRITELN;
+terminal Token		CADENA;
+terminal Token 		SEMICOLON, EQUAL, COMMA, COLON;
+terminal Token 		OPENPARENTHESIS, CLOSEPARENTHESIS;
+terminal Token 		ASSIGMENT;
+terminal Token 		MINUS, PLUS, AND, OR;
+terminal Token 		LESSTHAN, GREATERTHAN, NOTEQUAL;
+terminal Token 		IN;
+
+
+// Declaración de no terminales
+// no modificar los propuestos
+
+non terminal  		program;
+non terminal Axiom	Axiom;
+
+non terminal Programa			programa;
+non terminal Declaraciones		declaraciones;
+non terminal Subprogramas		subprogramas;
+non terminal Cuerpo 			cuerpo;
+non terminal SeccionConstantes	seccionConstantes;
+non terminal SeccionTipos		seccionTipos;
+non terminal SeccionVariables		seccionVariables;
+non terminal DeclaracionConstantes	declaracionConstantes;
+non terminal DeclaracionConstante	declaracionConstante;
+non terminal ListaIdentificadores	listaIdentificadores;
+non terminal ValorConstante		valorConstante;
+non terminal DeclaracionTipos		declaracionTipos;
+non terminal DeclaracionTipo		declaracionTipo;
+non terminal DefinicionTipo		definicionTipo;
+non terminal DefinicionRegistro	definicionRegistro;
+non terminal CamposRegistro		camposRegistro;
+non terminal CampoRegistro		campoRegistro;
+non terminal DefinicionConjunto	definicionConjunto;
+non terminal TipoPrimitivo		tipoPrimitivo;
+non terminal DeclaracionVariables	declaracionVariables;
+non terminal DeclaracionVariable	declaracionVariable;
+non terminal TipoVariable		tipoVariable;
+non terminal Subprograma		subprograma;
+non terminal Procedimiento 		procedimiento; 
+non terminal Funcion			funcion;
+non terminal DefinicionArgumentos	definicionArgumentos;
+non terminal Argumentos			argumentos;
+non terminal Argumento			argumento;
+non terminal ListaSentencias		listaSentencias;
+non terminal Sentencia			sentencia;
+non terminal SentenciaAsignacion	sentenciaAsignacion;
+non terminal SentenciaIf		sentenciaIf;
+non terminal SentenciaFor	 	sentenciaFor;
+non terminal SentenciaRepeat	 	sentenciaRepeat; 
+non terminal LlamadaFuncionOProcedimiento llamadaFuncionOProcedimiento;
+non terminal SentenciaES	 	sentenciaES;
+non terminal Referencia			referencia;
+non terminal Expresion			expresion;
+non terminal Operador			operador;
+non terminal ValorParametros		valorParametros;
+non terminal ExpresionPuntero		expresionPuntero;
+non terminal ExpresionConjunto	expresionConjunto;
+non terminal ExpresionPertenencia	expresionPertenencia;
+non terminal ParteElse			parteElse;
+non terminal BloqueSentencias		bloqueSentencias;
+non terminal MostradoPantalla		mostradoPantalla;
+
+// Declaración de relaciones de precedencia
+precedence left	MINUS, OR, AND, PLUS;
+precedence nonassoc	EQUAL, GREATERTHAN, NOTEQUAL, LESSTHAN, IN;
+precedence left ELSE;
+
+// Declaración de reglas de producción
+
+start with program;
+
+program ::= 
+  {: syntaxErrorManager.syntaxInfo ("Starting parsing..."); :}
+  Axiom:ax
+  {: 
+  		// No modificar esta estructura, aunque se pueden añadir más acciones semánticas
+  		// Para la entrega de febrero pueden comentarse las dos sentencias siguientes:
+		if(syntaxErrorManager.getNumberOfErrors()==0)
+		{
+  			List intermediateCode = ax.getIntermediateCode ();
+			System.out.println(intermediateCode);
+  			finalCodeFactory.create (intermediateCode);
+  			syntaxErrorManager.syntaxInfo ("Parsing proccess ended.");
+		}
+		else
+			System.err.println("No se genero codigo por errores de sintaxis");
+   :};
+
+
+
+Axiom ::= programa:p {: if(p!=null) RESULT = p; :};
+programa ::= PROGRAM IDENTIFICADOR:id {: scopeManager.openScope(id.getLexema()); :} SEMICOLON declaraciones subprogramas:s cuerpo:c{: if(s!=null &&c!=null) { RESULT = new Programa(s,c, scopeManager); }:}POINT {: scopeManager.closeScope(); :} | error {: syntaxErrorManager.syntaxFatalError("Error de sintaxis");  :} ;
+declaraciones ::= seccionConstantes seccionTipos seccionVariables;
+
+seccionConstantes ::= CONST declaracionConstantes| ;
+declaracionConstantes ::= declaracionConstante | declaracionConstante declaracionConstantes ;
+declaracionConstante ::= listaIdentificadores:lid EQUAL valorConstante:vc SEMICOLON 
+{: if(lid!=null && vc!=null) { DeclaracionConstante c= new DeclaracionConstante(lid,vc);
+   c.anadirTabla(scopeManager.getCurrentScope(), semanticErrorManager); }:}| error SEMICOLON{: syntaxErrorManager.syntaxFatalError("Error de sintaxis");  :} ;
+
+listaIdentificadores ::= IDENTIFICADOR:id COMMA listaIdentificadores:lista 
+{: if(lista!=null && id!=null) RESULT = new ListaIdentificadores(lista, id); :}| IDENTIFICADOR:id {: if (id!=null) RESULT = new ListaIdentificadores(id); :}| ;
+
+valorConstante ::= TRUE {: RESULT = new ValorConstante(true); :}| FALSE {: RESULT = new ValorConstante(false); :}|  LITERALENTERO:x {: RESULT = new ValorConstante(x.getValue()); :} ;
+
+seccionTipos ::= TYPE declaracionTipos | ;
+declaracionTipos ::= declaracionTipo | declaracionTipo declaracionTipos;
+declaracionTipo ::= IDENTIFICADOR:id EQUAL definicionTipo:dt SEMICOLON {: if(dt!=null) {DeclaracionTipo DT= new DeclaracionTipo(id,dt); DT.anadirTabla(scopeManager.getCurrentScope(), semanticErrorManager); } :} | error SEMICOLON;
+definicionTipo ::= definicionRegistro:dr {: if(dr!=null) RESULT = new DefinicionTipo(dr); :} | definicionConjunto:dc {: if(dc!=null) RESULT = new DefinicionTipo(dc); :} ;
+definicionConjunto ::= SETOF LITERALENTERO:i TWOPOINTS LITERALENTERO:f {: RESULT = new DefinicionConjunto(i,f); :} ;
+definicionRegistro::= RECORD camposRegistro:cr END {: if(cr!=null) RESULT = new DefinicionRegistro(cr); :};
+camposRegistro ::= campoRegistro:cp {:if(cp!=null) RESULT = new CamposRegistro(cp); :}| campoRegistro:cp camposRegistro:cs {:if(cp!=null&&cs!=null) RESULT = new CamposRegistro(cp,cs); :};
+campoRegistro ::= listaIdentificadores:li COLON tipoPrimitivo:tp SEMICOLON {: if(li!=null && tp!=null) RESULT = new CampoRegistro(li, tp); :};
+tipoPrimitivo ::= INTEGER {: RESULT = new TipoPrimitivo(Tipo.ENTERO); :} | BOOLEAN {: RESULT = new TipoPrimitivo(Tipo.BOOLEANO); :} | CARET INTEGER {: RESULT = new TipoPrimitivo(Tipo.PUNTERO); :} ;
+
+seccionVariables ::= VAR declaracionVariables| ;
+declaracionVariables ::= declaracionVariable | declaracionVariable declaracionVariables;
+declaracionVariable ::= listaIdentificadores:li COLON tipoVariable:tv SEMICOLON {: if(li!=null && tv!=null) {DeclaracionVariable dv=new DeclaracionVariable(li,tv); dv.anadirTabla(scopeManager, semanticErrorManager);} :}  | error SEMICOLON{: syntaxErrorManager.syntaxFatalError("Error de sintaxis");  :} ;
+tipoVariable ::= tipoPrimitivo:tp {: if(tp!=null) RESULT = new TipoVariable(tp); :} | IDENTIFICADOR: id {: RESULT = new TipoVariable(id); :} ;
+
+subprogramas ::= subprograma:s subprogramas:ss {:if(s!=null&&ss!=null) RESULT = new Subprogramas(s,ss, scopeManager); :} | {: RESULT = new Subprogramas(); :};
+subprograma ::=  procedimiento:p {: if(p!=null) RESULT= new Subprograma(p); :}| funcion:f {: if(f!=null) RESULT= new Subprograma(f); :};
+
+procedimiento ::= PROCEDURE IDENTIFICADOR:id OPENPARENTHESIS definicionArgumentos:da CLOSEPARENTHESIS SEMICOLON {: if(da!=null) { RESULT = new Procedimiento(id,da, scopeManager, semanticErrorManager);  scopeManager.openScope(id.getLexema()); RESULT.anadirAtributos(scopeManager, semanticErrorManager);}  :}declaraciones subprogramas:s cuerpo:c {:  if(RESULT!=null&& s!=null && c!=null) {  RESULT.generarCodigoIntermedio(s, c, scopeManager, semanticErrorManager); scopeManager.closeScope();} else RESULT=null; :}SEMICOLON | PROCEDURE error SEMICOLON declaraciones subprogramas cuerpo SEMICOLON {: syntaxErrorManager.syntaxFatalError("Error de sintaxis");  :} ;
+
+definicionArgumentos ::= argumentos:as {: if(as!=null) RESULT = new DefinicionArgumentos(as); :} | {: RESULT = new DefinicionArgumentos(); :} ;
+argumentos ::= argumento:a {:if(a!=null) RESULT = new Argumentos(a); :} | argumento:a SEMICOLON argumentos:as {: if(a!=null&&as!=null) RESULT = new Argumentos(a, as); :};
+argumento ::= listaIdentificadores:li COLON tipoVariable:tv{:if(li!=null&&tv!=null) RESULT = new Argumento(li,tv, true); :} | VAR listaIdentificadores:li COLON tipoVariable:tv{: if(li!=null&&tv!=null) RESULT = new Argumento(li,tv, false); :} ;
+
+funcion ::= FUNCTION IDENTIFICADOR:id OPENPARENTHESIS definicionArgumentos:da CLOSEPARENTHESIS COLON tipoPrimitivo:tp SEMICOLON {: if(da!=null && tp!=null) {RESULT = new Funcion(id,da,tp,scopeManager, semanticErrorManager); scopeManager.openScope(id.getLexema()); RESULT.anadirAtributos(scopeManager, semanticErrorManager);} :}declaraciones subprogramas:s cuerpo:c {: if(RESULT!=null&& s!=null && c!=null) { RESULT.comprobarVuelta(scopeManager, semanticErrorManager); RESULT.generarCodigoIntermedio(s, c,scopeManager, semanticErrorManager); scopeManager.closeScope(); } else RESULT=null; :} SEMICOLON | FUNCTION error SEMICOLON declaraciones subprogramas cuerpo SEMICOLON {: syntaxErrorManager.syntaxFatalError("Error de sintaxis");  :} | FUNCTION error BEGIN listaSentencias END SEMICOLON {: syntaxErrorManager.syntaxFatalError("Error de sintaxis");  :} ;
+
+cuerpo ::= BEGIN listaSentencias:ls  END {: if(ls!=null) RESULT= new Cuerpo(ls); :};
+
+listaSentencias ::= sentencia:s listaSentencias:ls {: RESULT=new ListaSentencias(s,ls, scopeManager); :} | {: RESULT=new ListaSentencias(); :}|error {: syntaxErrorManager.syntaxFatalError("Error de sintaxis");  :} ;
+
+sentencia ::= sentenciaAsignacion:s SEMICOLON {: if(s!=null)RESULT =new Sentencia(s); :} | sentenciaIf:s {:if(s!=null)RESULT =new Sentencia(s); :} | sentenciaFor:s {:if(s!=null)RESULT =new Sentencia(s); :} | sentenciaRepeat:s SEMICOLON {: if(s !=null)RESULT= new Sentencia(s); :} | llamadaFuncionOProcedimiento:lfp SEMICOLON {: if(lfp!=null) RESULT =new Sentencia(lfp, semanticErrorManager); :}| sentenciaES:s SEMICOLON {: if(s!=null) RESULT =new Sentencia(s); :} | error SEMICOLON {: syntaxErrorManager.syntaxFatalError("Error de sintaxis");  :} ;
+sentenciaAsignacion ::= referencia:r ASSIGMENT expresion:e {: if(r!=null && e!=null) RESULT=  new SentenciaAsignacion(r,e, scopeManager, semanticErrorManager); :};
+referencia ::= IDENTIFICADOR:id {: RESULT = new Referencia(id, scopeManager, semanticErrorManager); :} | IDENTIFICADOR:id1 POINT IDENTIFICADOR:id2 {: RESULT = new Referencia(id1, id2, scopeManager, semanticErrorManager); :} | IDENTIFICADOR:id CARET{:  RESULT = new Referencia(id, "^", scopeManager, semanticErrorManager); :};
+
+expresion ::= valorConstante:vc {: if(vc!=null)RESULT=new Expresion(vc,  scopeManager, semanticErrorManager); :}
+ | OPENPARENTHESIS expresion:e CLOSEPARENTHESIS {: if(e!=null)RESULT=new Expresion(e); :}| referencia: r {: if(r!=null)RESULT=new Expresion(r, scopeManager, semanticErrorManager); :}
+| llamadaFuncionOProcedimiento:lpf {:if(lpf!=null) RESULT=new Expresion(lpf,  scopeManager, semanticErrorManager); :}
+ | expresionPuntero: ep {: if(ep!=null) RESULT=new Expresion(ep); :}
+ | expresion:e1 operador:op expresion:e2  {: if(e1!=null &&e2!=null) RESULT=new Expresion(e1, op, e2,  scopeManager, semanticErrorManager); :}| expresionConjunto: ec {: if(ec!=null)RESULT=new Expresion(ec); :} | expresionPertenencia:ep {: if(ep!=null) RESULT=new Expresion(ep); :} | error {: syntaxErrorManager.syntaxFatalError("Error de sintaxis");  :} ;
+
+operador ::= MINUS:op {: RESULT=new Operador(op); :}| OR:op {: RESULT=new Operador(op); :} | GREATERTHAN:op {: RESULT=new Operador(op); :} | EQUAL:op {: RESULT=new Operador(op); :} | NOTEQUAL:op {: RESULT=new Operador(op); :}| AND:op {: RESULT=new Operador(op); :}| LESSTHAN:op {: RESULT=new Operador(op); :}|PLUS:op {: RESULT=new Operador(op); :};
+
+llamadaFuncionOProcedimiento ::= IDENTIFICADOR:id OPENPARENTHESIS valorParametros:vp CLOSEPARENTHESIS {: if(id!=null&&vp!=null) RESULT=new LlamadaFuncionOProcedimiento(id, vp, scopeManager, semanticErrorManager); :}
+| IDENTIFICADOR:id OPENPARENTHESIS CLOSEPARENTHESIS {: if(id!=null) RESULT=new LlamadaFuncionOProcedimiento(id, scopeManager, semanticErrorManager); :} ;
+
+valorParametros ::= expresion:e COMMA valorParametros:vp {: if(e!=null&&vp!=null) RESULT = new ValorParametros(e,vp); :} | expresion:e {: if(e!=null) RESULT = new ValorParametros(e); :} ;
+expresionPuntero ::= AT IDENTIFICADOR:id {: if(id!=null) RESULT = new ExpresionPuntero(id,scopeManager, semanticErrorManager); :};
+expresionPertenencia ::= expresion:ex IN IDENTIFICADOR:id {: if(ex!=null && id!=null) RESULT=  new ExpresionPertenencia(ex,id,scopeManager, semanticErrorManager);  :};
+expresionConjunto ::= OPENSQUAREBRACKET expresion:e1 TWOPOINTS expresion:e2 CLOSESQUAREBRACKET {: if(e1!=null&&e2!=null) RESULT= new ExpresionConjunto(e1,e2,scopeManager, semanticErrorManager);  :} | OPENSQUAREBRACKET CLOSESQUAREBRACKET {: RESULT= new ExpresionConjunto(scopeManager, semanticErrorManager);  :} ;
+ 
+
+sentenciaIf ::= IF:i OPENPARENTHESIS expresion:e CLOSEPARENTHESIS THEN bloqueSentencias:bs parteElse:pe{: if(e!=null&&bs!=null&&pe!=null) RESULT = new SentenciaIf(i,e, bs, pe, scopeManager, semanticErrorManager); :} | IF error bloqueSentencias {: syntaxErrorManager.syntaxFatalError("Error de sintaxis");  :} ;
+parteElse ::= ELSE bloqueSentencias:bs {: if(bs!=null) {RESULT = new ParteElse(bs);} :}| {: RESULT = new ParteElse(); :};
+bloqueSentencias ::= sentencia:s {: if(s!=null) {RESULT = new BloqueSentencias(s);} :}  | BEGIN listaSentencias:ls {:if(ls!=null) { RESULT = new BloqueSentencias(ls); }:} END SEMICOLON;
+sentenciaFor ::= FOR OPENPARENTHESIS sentenciaAsignacion:s TO expresion:ex CLOSEPARENTHESIS DO bloqueSentencias:bs {: if(s!=null && ex!=null && bs!=null){ RESULT = new SentenciaFor(s, ex, bs, scopeManager, semanticErrorManager); }:} ;
+sentenciaRepeat ::= REPEAT listaSentencias:ls UNTIL OPENPARENTHESIS expresion:ex CLOSEPARENTHESIS{: if(ls!=null&&ex!=null){RESULT = new SentenciaRepeat(ls, ex, scopeManager, semanticErrorManager); }:};
+sentenciaES ::= WRITE OPENPARENTHESIS mostradoPantalla:mp CLOSEPARENTHESIS {: if(mp!=null) {RESULT = new SentenciaES(mp);} :} | WRITELN OPENPARENTHESIS CLOSEPARENTHESIS{: RESULT = new SentenciaES(scopeManager); :} ;
+mostradoPantalla ::= CADENA:c {: if(c!=null){RESULT= new MostradoPantalla(c,scopeManager);} :} | expresion:e {: if(e!=null)
+		{RESULT= new MostradoPantalla(e,scopeManager, semanticErrorManager);} :};

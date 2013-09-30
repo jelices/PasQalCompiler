@@ -1,0 +1,120 @@
+Inicio:   
+MOVE #65535,.SP
+PUSH #65533
+PUSH #65533
+PUSH #0
+MOVE #65533,.IX
+MOVE #5,#-4[.IX]
+MOVE #-4[.IX],#-3[.IX]
+MOVE .IX, .R2
+ADD #-3,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-5[.IX]
+MOVE #-5[.IX],#-2[.IX]
+MOVE #-2[.IX],#-6[.IX]
+MOVE .IX, .R2
+ADD #-2,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-7[.IX]
+SUB .SP,#7
+MOVE .A, .SP
+PUSH #-6[.IX]
+PUSH .IX
+PUSH .IX
+MOVE .SP, .IX
+CALL /copiarPuntero
+MOVE .R9,#-9[.IX]
+ADD #3, .SP
+MOVE .A, .SP
+MOVE #-9[.IX],#-1[.IX]
+MOVE #-1[.IX],.R1
+MOVE [.R1],#-10[.IX]
+MOVE #1,#-11[.IX]
+ADD #-10[.IX],#-11[.IX]
+MOVE .A ,#-12[.IX]
+MOVE #-2[.IX],.R1
+MOVE #-12[.IX],[.R1]
+MOVE #-3[.IX],#-13[.IX]
+MOVE .IX, .R2
+ADD #-3,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-14[.IX]
+WRINT #-13[.IX]
+WRCHAR #10
+MOVE #-2[.IX],#-15[.IX]
+MOVE .IX, .R2
+ADD #-2,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-16[.IX]
+SUB .SP,#16
+MOVE .A, .SP
+PUSH #-15[.IX]
+PUSH .IX
+PUSH .IX
+MOVE .SP, .IX
+CALL /doblarNumero
+ADD #3, .SP
+MOVE .A, .SP
+MOVE #-3[.IX],#-18[.IX]
+MOVE .IX, .R2
+ADD #-3,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-19[.IX]
+WRINT #-18[.IX]
+WRCHAR #10
+MOVE #-1[.IX],#-20[.IX]
+MOVE .IX, .R2
+ADD #-1,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-21[.IX]
+SUB .SP,#21
+MOVE .A, .SP
+PUSH #-20[.IX]
+PUSH .IX
+PUSH .IX
+MOVE .SP, .IX
+CALL /imprimirDireccion
+ADD #3, .SP
+MOVE .A, .SP
+MOVE .IX, .R2
+ADD #-3,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-23[.IX]
+WRINT #-23[.IX]
+WRCHAR #10
+HALT
+doblarNumero:   NOP
+MOVE #3[.IX],.R1
+MOVE [.R1],#-1[.IX]
+MOVE #3[.IX],.R1
+MOVE [.R1],#-2[.IX]
+ADD #-1[.IX],#-2[.IX]
+MOVE .A ,#-3[.IX]
+MOVE #3[.IX],.R1
+MOVE #-3[.IX],[.R1]
+MOVE .IX, .SP
+MOVE #1[.IX], .IX
+MOVE [.SP], .PC
+imprimirDireccion:   NOP
+MOVE #3[.IX],#-1[.IX]
+MOVE .IX, .R2
+ADD #3,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-2[.IX]
+WRINT #-1[.IX]
+WRCHAR #10
+MOVE .IX, .SP
+MOVE #1[.IX], .IX
+MOVE [.SP], .PC
+copiarPuntero:   NOP
+MOVE #3[.IX],#-2[.IX]
+MOVE .IX, .R2
+ADD #3,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-3[.IX]
+MOVE #-2[.IX],#-1[.IX]
+MOVE #-1[.IX], .R9
+MOVE .IX, .SP
+MOVE #1[.IX], .IX
+MOVE [.SP], .PC
+

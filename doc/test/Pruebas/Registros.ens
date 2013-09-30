@@ -1,0 +1,258 @@
+Inicio:   
+MOVE #65535,.SP
+PUSH #65533
+PUSH #65533
+PUSH #0
+MOVE #65533,.IX
+MOVE #1,#-4[.IX]
+MOVE .IX, .R2
+ADD #-1,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-5[.IX]
+SUB #-5[.IX],#2
+MOVE .A ,#-5[.IX]
+MOVE #-5[.IX],.R1
+MOVE #-4[.IX],[.R1]
+MOVE #1,#-6[.IX]
+MOVE .IX, .R2
+ADD #-1,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-7[.IX]
+SUB #-7[.IX],#1
+MOVE .A ,#-7[.IX]
+MOVE #-7[.IX],.R1
+MOVE #-6[.IX],[.R1]
+MOVE #18,#-8[.IX]
+MOVE .IX, .R2
+ADD #-1,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-9[.IX]
+SUB #-9[.IX],#0
+MOVE .A ,#-9[.IX]
+MOVE #-9[.IX],.R1
+MOVE #-8[.IX],[.R1]
+MOVE .IX, .R2
+ADD #-1,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-10[.IX]
+MOVE #-10[.IX],.R1
+MOVE [.R1],#-11[.IX]
+DEC #-10[.IX]
+MOVE #-10[.IX],.R1
+MOVE [.R1],#-12[.IX]
+DEC #-10[.IX]
+MOVE #-10[.IX],.R1
+MOVE [.R1],#-13[.IX]
+DEC #-10[.IX]
+MOVE .IX, .R2
+ADD #-1,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-10[.IX]
+SUB .SP,#13
+MOVE .A, .SP
+PUSH #-10[.IX]
+PUSH .IX
+PUSH .IX
+MOVE .SP, .IX
+CALL /cumplirAnos
+ADD #3, .SP
+MOVE .A, .SP
+MOVE .IX, .R2
+ADD #-1,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-15[.IX]
+MOVE #-15[.IX],.R1
+MOVE [.R1],#-16[.IX]
+DEC #-15[.IX]
+MOVE #-15[.IX],.R1
+MOVE [.R1],#-17[.IX]
+DEC #-15[.IX]
+MOVE #-15[.IX],.R1
+MOVE [.R1],#-18[.IX]
+DEC #-15[.IX]
+MOVE .IX, .R2
+ADD #-1,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-15[.IX]
+SUB .SP,#18
+MOVE .A, .SP
+PUSH #-16[.IX]
+PUSH #-17[.IX]
+PUSH #-18[.IX]
+PUSH .IX
+PUSH .IX
+MOVE .SP, .IX
+CALL /imprimirPersona
+ADD #3, .SP
+MOVE .A, .SP
+HALT
+getEdad:   NOP
+MOVE .IX, .R2
+ADD #5,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-2[.IX]
+SUB #-2[.IX],#0
+MOVE .A ,#-2[.IX]
+MOVE #-2[.IX],.R1
+MOVE [.R1],#-3[.IX]
+MOVE #-3[.IX],#-1[.IX]
+MOVE #-1[.IX], .R9
+MOVE .IX, .SP
+MOVE #1[.IX], .IX
+MOVE [.SP], .PC
+setEdad:   NOP
+MOVE #3[.IX],#-1[.IX]
+MOVE .IX, .R2
+ADD #3,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-2[.IX]
+MOVE #4[.IX],#-3[.IX]
+SUB #-3[.IX],#0
+MOVE .A ,#-3[.IX]
+MOVE #-3[.IX],.R1
+MOVE #-1[.IX],[.R1]
+MOVE .IX, .SP
+MOVE #1[.IX], .IX
+MOVE [.SP], .PC
+cumplirAnos:   NOP
+MOVE #3[.IX],#-4[.IX]
+SUB #-4[.IX],#0
+MOVE .A ,#-4[.IX]
+MOVE #-4[.IX],.R1
+MOVE [.R1],#-5[.IX]
+MOVE .IX, .R2
+ADD #-1,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-6[.IX]
+SUB #-6[.IX],#0
+MOVE .A ,#-6[.IX]
+MOVE #-6[.IX],.R1
+MOVE #-5[.IX],[.R1]
+MOVE .IX, .R2
+ADD #-1,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-7[.IX]
+MOVE #-7[.IX],.R1
+MOVE [.R1],#-8[.IX]
+DEC #-7[.IX]
+MOVE #-7[.IX],.R1
+MOVE [.R1],#-9[.IX]
+DEC #-7[.IX]
+MOVE #-7[.IX],.R1
+MOVE [.R1],#-10[.IX]
+DEC #-7[.IX]
+MOVE .IX, .R2
+ADD #-1,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-7[.IX]
+MOVE .IX, .R2
+ADD #-1,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-11[.IX]
+MOVE #-11[.IX],.R1
+MOVE [.R1],#-12[.IX]
+DEC #-11[.IX]
+MOVE #-11[.IX],.R1
+MOVE [.R1],#-13[.IX]
+DEC #-11[.IX]
+MOVE #-11[.IX],.R1
+MOVE [.R1],#-14[.IX]
+DEC #-11[.IX]
+MOVE .IX, .R2
+ADD #-1,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-11[.IX]
+SUB .SP,#14
+MOVE .A, .SP
+PUSH #-12[.IX]
+PUSH #-13[.IX]
+PUSH #-14[.IX]
+PUSH #2[.IX]
+PUSH .IX
+MOVE .SP, .IX
+CALL /getEdad
+MOVE .R9,#-16[.IX]
+ADD #3, .SP
+MOVE .A, .SP
+MOVE #1,#-17[.IX]
+ADD #-16[.IX],#-17[.IX]
+MOVE .A ,#-18[.IX]
+SUB .SP,#18
+MOVE .A, .SP
+PUSH #-7[.IX]
+PUSH #-18[.IX]
+PUSH #2[.IX]
+PUSH .IX
+MOVE .SP, .IX
+CALL /setEdad
+ADD #4, .SP
+MOVE .A, .SP
+MOVE .IX, .R2
+ADD #-1,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-20[.IX]
+SUB #-20[.IX],#0
+MOVE .A ,#-20[.IX]
+MOVE #-20[.IX],.R1
+MOVE [.R1],#-21[.IX]
+MOVE #3[.IX],#-22[.IX]
+SUB #-22[.IX],#0
+MOVE .A ,#-22[.IX]
+MOVE #-22[.IX],.R1
+MOVE #-21[.IX],[.R1]
+MOVE .IX, .SP
+MOVE #1[.IX], .IX
+MOVE [.SP], .PC
+imprimirPersona:   NOP
+WRSTR /cadena1
+MOVE .IX, .R2
+ADD #5,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-1[.IX]
+SUB #-1[.IX],#2
+MOVE .A ,#-1[.IX]
+MOVE #-1[.IX],.R1
+MOVE [.R1],#-2[.IX]
+WRINT #-2[.IX]
+MOVE .IX, .R2
+ADD #5,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-3[.IX]
+SUB #-3[.IX],#1
+MOVE .A ,#-3[.IX]
+MOVE #-3[.IX],.R1
+MOVE [.R1],#-4[.IX]
+MOVE #1,#-5[.IX]
+CMP #-4[.IX],#-5[.IX]
+BZ /L0
+MOVE #0,#-6[.IX]
+BR /L1
+L0:   NOP
+MOVE #1,#-6[.IX]
+L1:   NOP
+CMP #-6[.IX],#0
+BZ /L2
+WRSTR /cadena2
+BR /L3
+L2:   NOP
+WRSTR /cadena3
+L3:   NOP
+MOVE .IX, .R2
+ADD #5,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-7[.IX]
+SUB #-7[.IX],#0
+MOVE .A ,#-7[.IX]
+MOVE #-7[.IX],.R1
+MOVE [.R1],#-8[.IX]
+WRINT #-8[.IX]
+WRSTR /cadena4
+WRCHAR #10
+MOVE .IX, .SP
+MOVE #1[.IX], .IX
+MOVE [.SP], .PC
+cadena1:	DATA "DNI: "
+cadena2:	DATA " esta casado y tiene "
+cadena3:	DATA " esta soltero y tiene "
+cadena4:	DATA " anos."
+

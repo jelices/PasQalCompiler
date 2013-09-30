@@ -1,0 +1,119 @@
+Inicio:   
+MOVE #65535,.SP
+PUSH #65533
+PUSH #65533
+PUSH #0
+MOVE #65533,.IX
+SUB .SP,#0
+MOVE .A, .SP
+PUSH .IX
+PUSH .IX
+MOVE .SP, .IX
+CALL /padre
+ADD #2, .SP
+MOVE .A, .SP
+HALT
+padre:   NOP
+SUB .SP,#1
+MOVE .A, .SP
+PUSH .IX
+PUSH .IX
+MOVE .SP, .IX
+CALL /hijo4
+ADD #2, .SP
+MOVE .A, .SP
+MOVE #-1[.IX],#-3[.IX]
+MOVE .IX, .R2
+ADD #-1,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-4[.IX]
+WRINT #-3[.IX]
+WRCHAR #10
+MOVE .IX, .SP
+MOVE #1[.IX], .IX
+MOVE [.SP], .PC
+hijo1:   NOP
+MOVE .IX, .R2
+ADD .R2, #2
+MOVE .A, .R2
+MOVE [.R2], .R2
+ADD .R2,#-1
+MOVE .A, .R2
+MOVE [.R2],#-1[.IX]
+MOVE .IX, .R2
+ADD .R2, #2
+MOVE .A, .R2
+MOVE [.R2], .R2
+ADD .R2,#-1
+MOVE .A ,.R2
+MOVE .R2 ,#-2[.IX]
+MOVE #1,#-3[.IX]
+ADD #-1[.IX],#-3[.IX]
+MOVE .A ,#-4[.IX]
+MOVE .IX, .R3
+ADD .R3, #2
+MOVE .A, .R3
+MOVE [.R3], .R3
+ADD .R3,#-1
+MOVE .A, .R3
+MOVE #-4[.IX],[.R3]
+WRSTR /cadena1
+WRCHAR #10
+MOVE .IX, .SP
+MOVE #1[.IX], .IX
+MOVE [.SP], .PC
+hijo2:   NOP
+SUB .SP,#0
+MOVE .A, .SP
+PUSH #2[.IX]
+PUSH .IX
+MOVE .SP, .IX
+CALL /hijo1
+ADD #2, .SP
+MOVE .A, .SP
+WRSTR /cadena2
+WRCHAR #10
+MOVE .IX, .SP
+MOVE #1[.IX], .IX
+MOVE [.SP], .PC
+hijo3:   NOP
+MOVE #10,#-1[.IX]
+MOVE .IX, .R3
+ADD .R3, #2
+MOVE .A, .R3
+MOVE [.R3], .R3
+ADD .R3,#-1
+MOVE .A, .R3
+MOVE #-1[.IX],[.R3]
+SUB .SP,#1
+MOVE .A, .SP
+PUSH #2[.IX]
+PUSH .IX
+MOVE .SP, .IX
+CALL /hijo2
+ADD #2, .SP
+MOVE .A, .SP
+WRSTR /cadena3
+WRCHAR #10
+MOVE .IX, .SP
+MOVE #1[.IX], .IX
+MOVE [.SP], .PC
+hijo4:   NOP
+SUB .SP,#0
+MOVE .A, .SP
+PUSH #2[.IX]
+PUSH .IX
+MOVE .SP, .IX
+CALL /hijo3
+ADD #2, .SP
+MOVE .A, .SP
+WRSTR /cadena4
+WRCHAR #10
+MOVE .IX, .SP
+MOVE #1[.IX], .IX
+MOVE [.SP], .PC
+cadena1:	DATA "Hijo1"
+cadena2:	DATA "Hijo2"
+cadena3:	DATA "Hijo3"
+cadena4:	DATA "Hijo4"
+

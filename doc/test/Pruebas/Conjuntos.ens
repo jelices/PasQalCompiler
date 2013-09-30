@@ -1,0 +1,801 @@
+Inicio:   
+MOVE #65535,.SP
+PUSH #65533
+PUSH #65533
+PUSH #0
+MOVE #65533,.IX
+MOVE #3,#-27[.IX]
+MOVE #5,#-28[.IX]
+CMP #-27[.IX],#1
+BN /L14
+CMP #10,#-28[.IX]
+BN /L14
+MOVE .IX, .R2
+ADD #-1,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-29[.IX]
+SUB #-27[.IX],#1
+MOVE .A ,#-27[.IX]
+SUB #-28[.IX],#1
+MOVE .A ,#-28[.IX]
+MOVE #0,#-30[.IX]
+L15:   NOP
+CMP #10,#-30[.IX]
+BZ /L17
+CMP #-30[.IX],#-27[.IX]
+BN /L16
+CMP #-28[.IX],#-30[.IX]
+BN /L16
+MOVE #-29[.IX],.R1
+MOVE #1,[.R1]
+INC #-30[.IX]
+DEC #-29[.IX]
+BR /L15
+L16:   NOP
+MOVE #-29[.IX],.R1
+MOVE #0,[.R1]
+INC #-30[.IX]
+DEC #-29[.IX]
+BR /L15
+L14:   NOP
+WRSTR /cadena1
+WRCHAR #10
+HALT
+L17:   NOP
+MOVE .IX, .R2
+ADD #-1,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-31[.IX]
+MOVE #-31[.IX],.R1
+MOVE [.R1],#-32[.IX]
+DEC #-31[.IX]
+MOVE #-31[.IX],.R1
+MOVE [.R1],#-33[.IX]
+DEC #-31[.IX]
+MOVE #-31[.IX],.R1
+MOVE [.R1],#-34[.IX]
+DEC #-31[.IX]
+MOVE #-31[.IX],.R1
+MOVE [.R1],#-35[.IX]
+DEC #-31[.IX]
+MOVE #-31[.IX],.R1
+MOVE [.R1],#-36[.IX]
+DEC #-31[.IX]
+MOVE #-31[.IX],.R1
+MOVE [.R1],#-37[.IX]
+DEC #-31[.IX]
+MOVE #-31[.IX],.R1
+MOVE [.R1],#-38[.IX]
+DEC #-31[.IX]
+MOVE #-31[.IX],.R1
+MOVE [.R1],#-39[.IX]
+DEC #-31[.IX]
+MOVE #-31[.IX],.R1
+MOVE [.R1],#-40[.IX]
+DEC #-31[.IX]
+MOVE #-31[.IX],.R1
+MOVE [.R1],#-41[.IX]
+DEC #-31[.IX]
+MOVE .IX, .R2
+ADD #-1,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-31[.IX]
+MOVE .IX, .R2
+ADD #-14,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-42[.IX]
+MOVE #-42[.IX],.R1
+MOVE [.R1],#-43[.IX]
+DEC #-42[.IX]
+MOVE #-42[.IX],.R1
+MOVE [.R1],#-44[.IX]
+DEC #-42[.IX]
+MOVE #-42[.IX],.R1
+MOVE [.R1],#-45[.IX]
+DEC #-42[.IX]
+MOVE #-42[.IX],.R1
+MOVE [.R1],#-46[.IX]
+DEC #-42[.IX]
+MOVE #-42[.IX],.R1
+MOVE [.R1],#-47[.IX]
+DEC #-42[.IX]
+MOVE #-42[.IX],.R1
+MOVE [.R1],#-48[.IX]
+DEC #-42[.IX]
+MOVE #-42[.IX],.R1
+MOVE [.R1],#-49[.IX]
+DEC #-42[.IX]
+MOVE #-42[.IX],.R1
+MOVE [.R1],#-50[.IX]
+DEC #-42[.IX]
+MOVE #-42[.IX],.R1
+MOVE [.R1],#-51[.IX]
+DEC #-42[.IX]
+MOVE #-42[.IX],.R1
+MOVE [.R1],#-52[.IX]
+DEC #-42[.IX]
+MOVE .IX, .R2
+ADD #-14,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-42[.IX]
+SUB .SP,#52
+MOVE .A, .SP
+PUSH #-31[.IX]
+PUSH #-43[.IX]
+PUSH #-44[.IX]
+PUSH #-45[.IX]
+PUSH #-46[.IX]
+PUSH #-47[.IX]
+PUSH #-48[.IX]
+PUSH #-49[.IX]
+PUSH #-50[.IX]
+PUSH #-51[.IX]
+PUSH #-52[.IX]
+PUSH .IX
+PUSH .IX
+MOVE .SP, .IX
+CALL /sumarConjuntos
+ADD #4, .SP
+MOVE .A, .SP
+MOVE .IX, .R2
+ADD #-1,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-54[.IX]
+MOVE #-54[.IX],.R1
+MOVE [.R1],#-55[.IX]
+DEC #-54[.IX]
+MOVE #-54[.IX],.R1
+MOVE [.R1],#-56[.IX]
+DEC #-54[.IX]
+MOVE #-54[.IX],.R1
+MOVE [.R1],#-57[.IX]
+DEC #-54[.IX]
+MOVE #-54[.IX],.R1
+MOVE [.R1],#-58[.IX]
+DEC #-54[.IX]
+MOVE #-54[.IX],.R1
+MOVE [.R1],#-59[.IX]
+DEC #-54[.IX]
+MOVE #-54[.IX],.R1
+MOVE [.R1],#-60[.IX]
+DEC #-54[.IX]
+MOVE #-54[.IX],.R1
+MOVE [.R1],#-61[.IX]
+DEC #-54[.IX]
+MOVE #-54[.IX],.R1
+MOVE [.R1],#-62[.IX]
+DEC #-54[.IX]
+MOVE #-54[.IX],.R1
+MOVE [.R1],#-63[.IX]
+DEC #-54[.IX]
+MOVE #-54[.IX],.R1
+MOVE [.R1],#-64[.IX]
+DEC #-54[.IX]
+MOVE .IX, .R2
+ADD #-1,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-54[.IX]
+SUB .SP,#64
+MOVE .A, .SP
+PUSH #-55[.IX]
+PUSH #-56[.IX]
+PUSH #-57[.IX]
+PUSH #-58[.IX]
+PUSH #-59[.IX]
+PUSH #-60[.IX]
+PUSH #-61[.IX]
+PUSH #-62[.IX]
+PUSH #-63[.IX]
+PUSH #-64[.IX]
+PUSH .IX
+PUSH .IX
+MOVE .SP, .IX
+CALL /imprimirConjunto
+ADD #3, .SP
+MOVE .A, .SP
+WRCHAR #10
+MOVE .IX, .R2
+ADD #-1,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-66[.IX]
+MOVE #-66[.IX],.R1
+MOVE [.R1],#-67[.IX]
+DEC #-66[.IX]
+MOVE #-66[.IX],.R1
+MOVE [.R1],#-68[.IX]
+DEC #-66[.IX]
+MOVE #-66[.IX],.R1
+MOVE [.R1],#-69[.IX]
+DEC #-66[.IX]
+MOVE #-66[.IX],.R1
+MOVE [.R1],#-70[.IX]
+DEC #-66[.IX]
+MOVE #-66[.IX],.R1
+MOVE [.R1],#-71[.IX]
+DEC #-66[.IX]
+MOVE #-66[.IX],.R1
+MOVE [.R1],#-72[.IX]
+DEC #-66[.IX]
+MOVE #-66[.IX],.R1
+MOVE [.R1],#-73[.IX]
+DEC #-66[.IX]
+MOVE #-66[.IX],.R1
+MOVE [.R1],#-74[.IX]
+DEC #-66[.IX]
+MOVE #-66[.IX],.R1
+MOVE [.R1],#-75[.IX]
+DEC #-66[.IX]
+MOVE #-66[.IX],.R1
+MOVE [.R1],#-76[.IX]
+DEC #-66[.IX]
+MOVE .IX, .R2
+ADD #-1,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-66[.IX]
+SUB .SP,#76
+MOVE .A, .SP
+PUSH #-66[.IX]
+PUSH .IX
+PUSH .IX
+MOVE .SP, .IX
+CALL /anadirElementos1y10
+ADD #3, .SP
+MOVE .A, .SP
+MOVE .IX, .R2
+ADD #-1,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-78[.IX]
+MOVE #-78[.IX],.R1
+MOVE [.R1],#-79[.IX]
+DEC #-78[.IX]
+MOVE #-78[.IX],.R1
+MOVE [.R1],#-80[.IX]
+DEC #-78[.IX]
+MOVE #-78[.IX],.R1
+MOVE [.R1],#-81[.IX]
+DEC #-78[.IX]
+MOVE #-78[.IX],.R1
+MOVE [.R1],#-82[.IX]
+DEC #-78[.IX]
+MOVE #-78[.IX],.R1
+MOVE [.R1],#-83[.IX]
+DEC #-78[.IX]
+MOVE #-78[.IX],.R1
+MOVE [.R1],#-84[.IX]
+DEC #-78[.IX]
+MOVE #-78[.IX],.R1
+MOVE [.R1],#-85[.IX]
+DEC #-78[.IX]
+MOVE #-78[.IX],.R1
+MOVE [.R1],#-86[.IX]
+DEC #-78[.IX]
+MOVE #-78[.IX],.R1
+MOVE [.R1],#-87[.IX]
+DEC #-78[.IX]
+MOVE #-78[.IX],.R1
+MOVE [.R1],#-88[.IX]
+DEC #-78[.IX]
+MOVE .IX, .R2
+ADD #-1,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-78[.IX]
+SUB .SP,#88
+MOVE .A, .SP
+PUSH #-79[.IX]
+PUSH #-80[.IX]
+PUSH #-81[.IX]
+PUSH #-82[.IX]
+PUSH #-83[.IX]
+PUSH #-84[.IX]
+PUSH #-85[.IX]
+PUSH #-86[.IX]
+PUSH #-87[.IX]
+PUSH #-88[.IX]
+PUSH .IX
+PUSH .IX
+MOVE .SP, .IX
+CALL /imprimirConjunto
+ADD #3, .SP
+MOVE .A, .SP
+HALT
+sumarConjuntos:   NOP
+MOVE #13[.IX],#-1[.IX]
+MOVE #-1[.IX],.R1
+MOVE [.R1],#-2[.IX]
+DEC #-1[.IX]
+MOVE #-1[.IX],.R1
+MOVE [.R1],#-3[.IX]
+DEC #-1[.IX]
+MOVE #-1[.IX],.R1
+MOVE [.R1],#-4[.IX]
+DEC #-1[.IX]
+MOVE #-1[.IX],.R1
+MOVE [.R1],#-5[.IX]
+DEC #-1[.IX]
+MOVE #-1[.IX],.R1
+MOVE [.R1],#-6[.IX]
+DEC #-1[.IX]
+MOVE #-1[.IX],.R1
+MOVE [.R1],#-7[.IX]
+DEC #-1[.IX]
+MOVE #-1[.IX],.R1
+MOVE [.R1],#-8[.IX]
+DEC #-1[.IX]
+MOVE #-1[.IX],.R1
+MOVE [.R1],#-9[.IX]
+DEC #-1[.IX]
+MOVE #-1[.IX],.R1
+MOVE [.R1],#-10[.IX]
+DEC #-1[.IX]
+MOVE #-1[.IX],.R1
+MOVE [.R1],#-11[.IX]
+DEC #-1[.IX]
+MOVE .IX, .R2
+ADD #12,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-12[.IX]
+MOVE #-12[.IX],.R1
+MOVE [.R1],#-13[.IX]
+DEC #-12[.IX]
+MOVE #-12[.IX],.R1
+MOVE [.R1],#-14[.IX]
+DEC #-12[.IX]
+MOVE #-12[.IX],.R1
+MOVE [.R1],#-15[.IX]
+DEC #-12[.IX]
+MOVE #-12[.IX],.R1
+MOVE [.R1],#-16[.IX]
+DEC #-12[.IX]
+MOVE #-12[.IX],.R1
+MOVE [.R1],#-17[.IX]
+DEC #-12[.IX]
+MOVE #-12[.IX],.R1
+MOVE [.R1],#-18[.IX]
+DEC #-12[.IX]
+MOVE #-12[.IX],.R1
+MOVE [.R1],#-19[.IX]
+DEC #-12[.IX]
+MOVE #-12[.IX],.R1
+MOVE [.R1],#-20[.IX]
+DEC #-12[.IX]
+MOVE #-12[.IX],.R1
+MOVE [.R1],#-21[.IX]
+DEC #-12[.IX]
+MOVE #-12[.IX],.R1
+MOVE [.R1],#-22[.IX]
+DEC #-12[.IX]
+MOVE .IX, .R2
+ADD #12,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-12[.IX]
+OR #-2[.IX],#-13[.IX]
+MOVE .A ,#-2[.IX]
+OR #-3[.IX],#-14[.IX]
+MOVE .A ,#-3[.IX]
+OR #-4[.IX],#-15[.IX]
+MOVE .A ,#-4[.IX]
+OR #-5[.IX],#-16[.IX]
+MOVE .A ,#-5[.IX]
+OR #-6[.IX],#-17[.IX]
+MOVE .A ,#-6[.IX]
+OR #-7[.IX],#-18[.IX]
+MOVE .A ,#-7[.IX]
+OR #-8[.IX],#-19[.IX]
+MOVE .A ,#-8[.IX]
+OR #-9[.IX],#-20[.IX]
+MOVE .A ,#-9[.IX]
+OR #-10[.IX],#-21[.IX]
+MOVE .A ,#-10[.IX]
+OR #-11[.IX],#-22[.IX]
+MOVE .A ,#-11[.IX]
+MOVE #13[.IX],#-23[.IX]
+MOVE #-23[.IX],.R1
+MOVE #-2[.IX],[.R1]
+DEC #-23[.IX]
+MOVE #-23[.IX],.R1
+MOVE #-3[.IX],[.R1]
+DEC #-23[.IX]
+MOVE #-23[.IX],.R1
+MOVE #-4[.IX],[.R1]
+DEC #-23[.IX]
+MOVE #-23[.IX],.R1
+MOVE #-5[.IX],[.R1]
+DEC #-23[.IX]
+MOVE #-23[.IX],.R1
+MOVE #-6[.IX],[.R1]
+DEC #-23[.IX]
+MOVE #-23[.IX],.R1
+MOVE #-7[.IX],[.R1]
+DEC #-23[.IX]
+MOVE #-23[.IX],.R1
+MOVE #-8[.IX],[.R1]
+DEC #-23[.IX]
+MOVE #-23[.IX],.R1
+MOVE #-9[.IX],[.R1]
+DEC #-23[.IX]
+MOVE #-23[.IX],.R1
+MOVE #-10[.IX],[.R1]
+DEC #-23[.IX]
+MOVE #-23[.IX],.R1
+MOVE #-11[.IX],[.R1]
+DEC #-23[.IX]
+MOVE .IX, .SP
+MOVE #1[.IX], .IX
+MOVE [.SP], .PC
+imprimirConjunto:   NOP
+MOVE #1,#-2[.IX]
+MOVE #-2[.IX],#-1[.IX]
+MOVE #10,#-3[.IX]
+L4:   NOP
+CMP #-3[.IX],#-2[.IX]
+BN /L5
+MOVE #-1[.IX],#-4[.IX]
+MOVE .IX, .R2
+ADD #-1,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-5[.IX]
+WRINT #-4[.IX]
+MOVE #-1[.IX],#-6[.IX]
+MOVE .IX, .R2
+ADD #-1,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-7[.IX]
+CMP #-6[.IX],#1
+BN /L0
+CMP #10,#-6[.IX]
+BN /L0
+MOVE .IX, .R2
+ADD #12,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-8[.IX]
+SUB #-6[.IX],#1
+MOVE .A ,#-6[.IX]
+SUB #-8[.IX],#-6[.IX]
+MOVE .A ,#-8[.IX]
+MOVE #-8[.IX],.R1
+MOVE [.R1],#-9[.IX]
+BR /L1
+L0:   NOP
+MOVE #0,#-9[.IX]
+L1:   NOP
+CMP #-9[.IX],#0
+BZ /L2
+WRSTR /cadena2
+BR /L3
+L2:   NOP
+WRSTR /cadena3
+L3:   NOP
+WRCHAR #10
+INC #-2[.IX]
+MOVE #-2[.IX],#-1[.IX]
+BR /L4
+L5:   NOP
+MOVE .IX, .SP
+MOVE #1[.IX], .IX
+MOVE [.SP], .PC
+anadirElementos1y10:   NOP
+MOVE #1,#-11[.IX]
+MOVE #1,#-12[.IX]
+CMP #-11[.IX],#1
+BN /L6
+CMP #10,#-12[.IX]
+BN /L6
+MOVE .IX, .R2
+ADD #-1,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-13[.IX]
+SUB #-11[.IX],#1
+MOVE .A ,#-11[.IX]
+SUB #-12[.IX],#1
+MOVE .A ,#-12[.IX]
+MOVE #0,#-14[.IX]
+L7:   NOP
+CMP #10,#-14[.IX]
+BZ /L9
+CMP #-14[.IX],#-11[.IX]
+BN /L8
+CMP #-12[.IX],#-14[.IX]
+BN /L8
+MOVE #-13[.IX],.R1
+MOVE #1,[.R1]
+INC #-14[.IX]
+DEC #-13[.IX]
+BR /L7
+L8:   NOP
+MOVE #-13[.IX],.R1
+MOVE #0,[.R1]
+INC #-14[.IX]
+DEC #-13[.IX]
+BR /L7
+L6:   NOP
+WRSTR /cadena4
+WRCHAR #10
+HALT
+L9:   NOP
+MOVE #3[.IX],#-15[.IX]
+MOVE #-15[.IX],.R1
+MOVE [.R1],#-16[.IX]
+DEC #-15[.IX]
+MOVE #-15[.IX],.R1
+MOVE [.R1],#-17[.IX]
+DEC #-15[.IX]
+MOVE #-15[.IX],.R1
+MOVE [.R1],#-18[.IX]
+DEC #-15[.IX]
+MOVE #-15[.IX],.R1
+MOVE [.R1],#-19[.IX]
+DEC #-15[.IX]
+MOVE #-15[.IX],.R1
+MOVE [.R1],#-20[.IX]
+DEC #-15[.IX]
+MOVE #-15[.IX],.R1
+MOVE [.R1],#-21[.IX]
+DEC #-15[.IX]
+MOVE #-15[.IX],.R1
+MOVE [.R1],#-22[.IX]
+DEC #-15[.IX]
+MOVE #-15[.IX],.R1
+MOVE [.R1],#-23[.IX]
+DEC #-15[.IX]
+MOVE #-15[.IX],.R1
+MOVE [.R1],#-24[.IX]
+DEC #-15[.IX]
+MOVE #-15[.IX],.R1
+MOVE [.R1],#-25[.IX]
+DEC #-15[.IX]
+MOVE .IX, .R2
+ADD #-1,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-26[.IX]
+MOVE #-26[.IX],.R1
+MOVE [.R1],#-27[.IX]
+DEC #-26[.IX]
+MOVE #-26[.IX],.R1
+MOVE [.R1],#-28[.IX]
+DEC #-26[.IX]
+MOVE #-26[.IX],.R1
+MOVE [.R1],#-29[.IX]
+DEC #-26[.IX]
+MOVE #-26[.IX],.R1
+MOVE [.R1],#-30[.IX]
+DEC #-26[.IX]
+MOVE #-26[.IX],.R1
+MOVE [.R1],#-31[.IX]
+DEC #-26[.IX]
+MOVE #-26[.IX],.R1
+MOVE [.R1],#-32[.IX]
+DEC #-26[.IX]
+MOVE #-26[.IX],.R1
+MOVE [.R1],#-33[.IX]
+DEC #-26[.IX]
+MOVE #-26[.IX],.R1
+MOVE [.R1],#-34[.IX]
+DEC #-26[.IX]
+MOVE #-26[.IX],.R1
+MOVE [.R1],#-35[.IX]
+DEC #-26[.IX]
+MOVE #-26[.IX],.R1
+MOVE [.R1],#-36[.IX]
+DEC #-26[.IX]
+MOVE .IX, .R2
+ADD #-1,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-26[.IX]
+OR #-16[.IX],#-27[.IX]
+MOVE .A ,#-16[.IX]
+OR #-17[.IX],#-28[.IX]
+MOVE .A ,#-17[.IX]
+OR #-18[.IX],#-29[.IX]
+MOVE .A ,#-18[.IX]
+OR #-19[.IX],#-30[.IX]
+MOVE .A ,#-19[.IX]
+OR #-20[.IX],#-31[.IX]
+MOVE .A ,#-20[.IX]
+OR #-21[.IX],#-32[.IX]
+MOVE .A ,#-21[.IX]
+OR #-22[.IX],#-33[.IX]
+MOVE .A ,#-22[.IX]
+OR #-23[.IX],#-34[.IX]
+MOVE .A ,#-23[.IX]
+OR #-24[.IX],#-35[.IX]
+MOVE .A ,#-24[.IX]
+OR #-25[.IX],#-36[.IX]
+MOVE .A ,#-25[.IX]
+MOVE #3[.IX],#-37[.IX]
+MOVE #-37[.IX],.R1
+MOVE #-16[.IX],[.R1]
+DEC #-37[.IX]
+MOVE #-37[.IX],.R1
+MOVE #-17[.IX],[.R1]
+DEC #-37[.IX]
+MOVE #-37[.IX],.R1
+MOVE #-18[.IX],[.R1]
+DEC #-37[.IX]
+MOVE #-37[.IX],.R1
+MOVE #-19[.IX],[.R1]
+DEC #-37[.IX]
+MOVE #-37[.IX],.R1
+MOVE #-20[.IX],[.R1]
+DEC #-37[.IX]
+MOVE #-37[.IX],.R1
+MOVE #-21[.IX],[.R1]
+DEC #-37[.IX]
+MOVE #-37[.IX],.R1
+MOVE #-22[.IX],[.R1]
+DEC #-37[.IX]
+MOVE #-37[.IX],.R1
+MOVE #-23[.IX],[.R1]
+DEC #-37[.IX]
+MOVE #-37[.IX],.R1
+MOVE #-24[.IX],[.R1]
+DEC #-37[.IX]
+MOVE #-37[.IX],.R1
+MOVE #-25[.IX],[.R1]
+DEC #-37[.IX]
+MOVE #10,#-38[.IX]
+MOVE #10,#-39[.IX]
+CMP #-38[.IX],#1
+BN /L10
+CMP #10,#-39[.IX]
+BN /L10
+MOVE .IX, .R2
+ADD #-1,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-40[.IX]
+SUB #-38[.IX],#1
+MOVE .A ,#-38[.IX]
+SUB #-39[.IX],#1
+MOVE .A ,#-39[.IX]
+MOVE #0,#-41[.IX]
+L11:   NOP
+CMP #10,#-41[.IX]
+BZ /L13
+CMP #-41[.IX],#-38[.IX]
+BN /L12
+CMP #-39[.IX],#-41[.IX]
+BN /L12
+MOVE #-40[.IX],.R1
+MOVE #1,[.R1]
+INC #-41[.IX]
+DEC #-40[.IX]
+BR /L11
+L12:   NOP
+MOVE #-40[.IX],.R1
+MOVE #0,[.R1]
+INC #-41[.IX]
+DEC #-40[.IX]
+BR /L11
+L10:   NOP
+WRSTR /cadena5
+WRCHAR #10
+HALT
+L13:   NOP
+MOVE #3[.IX],#-42[.IX]
+MOVE #-42[.IX],.R1
+MOVE [.R1],#-43[.IX]
+DEC #-42[.IX]
+MOVE #-42[.IX],.R1
+MOVE [.R1],#-44[.IX]
+DEC #-42[.IX]
+MOVE #-42[.IX],.R1
+MOVE [.R1],#-45[.IX]
+DEC #-42[.IX]
+MOVE #-42[.IX],.R1
+MOVE [.R1],#-46[.IX]
+DEC #-42[.IX]
+MOVE #-42[.IX],.R1
+MOVE [.R1],#-47[.IX]
+DEC #-42[.IX]
+MOVE #-42[.IX],.R1
+MOVE [.R1],#-48[.IX]
+DEC #-42[.IX]
+MOVE #-42[.IX],.R1
+MOVE [.R1],#-49[.IX]
+DEC #-42[.IX]
+MOVE #-42[.IX],.R1
+MOVE [.R1],#-50[.IX]
+DEC #-42[.IX]
+MOVE #-42[.IX],.R1
+MOVE [.R1],#-51[.IX]
+DEC #-42[.IX]
+MOVE #-42[.IX],.R1
+MOVE [.R1],#-52[.IX]
+DEC #-42[.IX]
+MOVE .IX, .R2
+ADD #-1,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-53[.IX]
+MOVE #-53[.IX],.R1
+MOVE [.R1],#-54[.IX]
+DEC #-53[.IX]
+MOVE #-53[.IX],.R1
+MOVE [.R1],#-55[.IX]
+DEC #-53[.IX]
+MOVE #-53[.IX],.R1
+MOVE [.R1],#-56[.IX]
+DEC #-53[.IX]
+MOVE #-53[.IX],.R1
+MOVE [.R1],#-57[.IX]
+DEC #-53[.IX]
+MOVE #-53[.IX],.R1
+MOVE [.R1],#-58[.IX]
+DEC #-53[.IX]
+MOVE #-53[.IX],.R1
+MOVE [.R1],#-59[.IX]
+DEC #-53[.IX]
+MOVE #-53[.IX],.R1
+MOVE [.R1],#-60[.IX]
+DEC #-53[.IX]
+MOVE #-53[.IX],.R1
+MOVE [.R1],#-61[.IX]
+DEC #-53[.IX]
+MOVE #-53[.IX],.R1
+MOVE [.R1],#-62[.IX]
+DEC #-53[.IX]
+MOVE #-53[.IX],.R1
+MOVE [.R1],#-63[.IX]
+DEC #-53[.IX]
+MOVE .IX, .R2
+ADD #-1,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-53[.IX]
+OR #-43[.IX],#-54[.IX]
+MOVE .A ,#-43[.IX]
+OR #-44[.IX],#-55[.IX]
+MOVE .A ,#-44[.IX]
+OR #-45[.IX],#-56[.IX]
+MOVE .A ,#-45[.IX]
+OR #-46[.IX],#-57[.IX]
+MOVE .A ,#-46[.IX]
+OR #-47[.IX],#-58[.IX]
+MOVE .A ,#-47[.IX]
+OR #-48[.IX],#-59[.IX]
+MOVE .A ,#-48[.IX]
+OR #-49[.IX],#-60[.IX]
+MOVE .A ,#-49[.IX]
+OR #-50[.IX],#-61[.IX]
+MOVE .A ,#-50[.IX]
+OR #-51[.IX],#-62[.IX]
+MOVE .A ,#-51[.IX]
+OR #-52[.IX],#-63[.IX]
+MOVE .A ,#-52[.IX]
+MOVE #3[.IX],#-64[.IX]
+MOVE #-64[.IX],.R1
+MOVE #-43[.IX],[.R1]
+DEC #-64[.IX]
+MOVE #-64[.IX],.R1
+MOVE #-44[.IX],[.R1]
+DEC #-64[.IX]
+MOVE #-64[.IX],.R1
+MOVE #-45[.IX],[.R1]
+DEC #-64[.IX]
+MOVE #-64[.IX],.R1
+MOVE #-46[.IX],[.R1]
+DEC #-64[.IX]
+MOVE #-64[.IX],.R1
+MOVE #-47[.IX],[.R1]
+DEC #-64[.IX]
+MOVE #-64[.IX],.R1
+MOVE #-48[.IX],[.R1]
+DEC #-64[.IX]
+MOVE #-64[.IX],.R1
+MOVE #-49[.IX],[.R1]
+DEC #-64[.IX]
+MOVE #-64[.IX],.R1
+MOVE #-50[.IX],[.R1]
+DEC #-64[.IX]
+MOVE #-64[.IX],.R1
+MOVE #-51[.IX],[.R1]
+DEC #-64[.IX]
+MOVE #-64[.IX],.R1
+MOVE #-52[.IX],[.R1]
+DEC #-64[.IX]
+MOVE .IX, .SP
+MOVE #1[.IX], .IX
+MOVE [.SP], .PC
+cadena1:	DATA "Fuera de rango del conjunto"
+cadena2:	DATA " esta en el conjunto"
+cadena3:	DATA " no esta en el conjunto"
+cadena4:	DATA "Fuera de rango del conjunto"
+cadena5:	DATA "Fuera de rango del conjunto"
+

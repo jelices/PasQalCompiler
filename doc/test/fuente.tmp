@@ -1,0 +1,89 @@
+Inicio:   
+MOVE #65535,.SP
+PUSH #65533
+PUSH #65533
+PUSH #0
+MOVE #65533,.IX
+MOVE #10,#-1[.IX]
+SUB .SP,#1
+MOVE .A, .SP
+PUSH #-1[.IX]
+PUSH .IX
+PUSH .IX
+MOVE .SP, .IX
+CALL /fibonacci
+MOVE .R9,#-3[.IX]
+ADD #3, .SP
+MOVE .A, .SP
+WRINT #-3[.IX]
+HALT
+fibonacci:   NOP
+MOVE #3[.IX],#-2[.IX]
+MOVE .IX, .R2
+ADD #3,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-3[.IX]
+MOVE #2,#-4[.IX]
+CMP #-2[.IX],#-4[.IX]
+BP /L0
+MOVE #1,#-5[.IX]
+BR /L1
+L0:   NOP
+MOVE #0,#-5[.IX]
+L1:   NOP
+CMP #-5[.IX],#0
+BZ /L2
+MOVE #3[.IX],#-6[.IX]
+MOVE .IX, .R2
+ADD #3,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-7[.IX]
+MOVE #-6[.IX],#-1[.IX]
+BR /L3
+L2:   NOP
+MOVE #3[.IX],#-8[.IX]
+MOVE .IX, .R2
+ADD #3,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-9[.IX]
+MOVE #1,#-10[.IX]
+SUB #-8[.IX],#-10[.IX]
+MOVE .A ,#-11[.IX]
+SUB .SP,#11
+MOVE .A, .SP
+PUSH #-11[.IX]
+PUSH #2[.IX]
+PUSH .IX
+MOVE .SP, .IX
+CALL /fibonacci
+MOVE .R9,#-13[.IX]
+ADD #3, .SP
+MOVE .A, .SP
+MOVE #3[.IX],#-14[.IX]
+MOVE .IX, .R2
+ADD #3,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-15[.IX]
+MOVE #2,#-16[.IX]
+SUB #-14[.IX],#-16[.IX]
+MOVE .A ,#-17[.IX]
+SUB .SP,#17
+MOVE .A, .SP
+PUSH #-17[.IX]
+PUSH #2[.IX]
+PUSH .IX
+MOVE .SP, .IX
+CALL /fibonacci
+MOVE .R9,#-19[.IX]
+ADD #3, .SP
+MOVE .A, .SP
+ADD #-13[.IX],#-19[.IX]
+MOVE .A ,#-20[.IX]
+MOVE #-20[.IX],#-1[.IX]
+L3:   NOP
+MOVE #-1[.IX], .R9
+MOVE .IX, .SP
+MOVE #1[.IX], .IX
+MOVE [.SP], .PC
+
+

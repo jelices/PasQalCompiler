@@ -1,0 +1,102 @@
+Inicio:   
+MOVE #65535,.SP
+PUSH #65533
+PUSH #65533
+PUSH #0
+MOVE #65533,.IX
+MOVE #5,#-2[.IX]
+MOVE #-2[.IX],#-1[.IX]
+MOVE #-1[.IX],#-3[.IX]
+MOVE .IX, .R2
+ADD #-1,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-4[.IX]
+MOVE #5,#-5[.IX]
+SUB .SP,#5
+MOVE .A, .SP
+PUSH #-4[.IX]
+PUSH #-5[.IX]
+PUSH .IX
+PUSH .IX
+MOVE .SP, .IX
+CALL /sumar
+ADD #4, .SP
+MOVE .A, .SP
+MOVE #-1[.IX],#-7[.IX]
+MOVE .IX, .R2
+ADD #-1,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-8[.IX]
+WRINT #-7[.IX]
+HALT
+incrementar:   NOP
+MOVE #3[.IX],.R1
+MOVE [.R1],#-1[.IX]
+MOVE #1,#-2[.IX]
+ADD #-1[.IX],#-2[.IX]
+MOVE .A ,#-3[.IX]
+MOVE #3[.IX],.R1
+MOVE #-3[.IX],[.R1]
+MOVE .IX, .SP
+MOVE #1[.IX], .IX
+MOVE [.SP], .PC
+sumar:   NOP
+MOVE #4[.IX],.R1
+MOVE [.R1],#-3[.IX]
+MOVE #-3[.IX],#-1[.IX]
+MOVE #3[.IX],#-4[.IX]
+MOVE .IX, .R2
+ADD #3,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-5[.IX]
+MOVE #-4[.IX],#-2[.IX]
+L2:   NOP
+MOVE #-1[.IX],#-6[.IX]
+MOVE .IX, .R2
+ADD #-1,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-7[.IX]
+SUB .SP,#7
+MOVE .A, .SP
+PUSH #-7[.IX]
+PUSH #2[.IX]
+PUSH .IX
+MOVE .SP, .IX
+CALL /incrementar
+ADD #3, .SP
+MOVE .A, .SP
+MOVE #-2[.IX],#-9[.IX]
+MOVE .IX, .R2
+ADD #-2,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-10[.IX]
+MOVE #1,#-11[.IX]
+SUB #-9[.IX],#-11[.IX]
+MOVE .A ,#-12[.IX]
+MOVE #-12[.IX],#-2[.IX]
+MOVE #-2[.IX],#-13[.IX]
+MOVE .IX, .R2
+ADD #-2,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-14[.IX]
+MOVE #0,#-15[.IX]
+CMP #-13[.IX],#-15[.IX]
+BZ /L0
+MOVE #0,#-16[.IX]
+BR /L1
+L0:   NOP
+MOVE #1,#-16[.IX]
+L1:   NOP
+CMP #-16[.IX],#0
+BZ /L2
+MOVE #-1[.IX],#-17[.IX]
+MOVE .IX, .R2
+ADD #-1,.R2
+MOVE .A ,.R2
+MOVE .R2 ,#-18[.IX]
+MOVE #4[.IX],.R1
+MOVE #-17[.IX],[.R1]
+MOVE .IX, .SP
+MOVE #1[.IX], .IX
+MOVE [.SP], .PC
+
